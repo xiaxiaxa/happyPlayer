@@ -3,5 +3,7 @@
 
     <color name="xw_yellow">#FF9800</color>
     <color name="xw_white">#FFFFFFFF</color>
+    <color name="xw_red">#FF0000</color>
+    <color name="xw_text">#7486e7</color>
 
 </resources>

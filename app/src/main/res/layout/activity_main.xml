@@ -8,15 +8,6 @@
     android:paddingTop="@dimen/main_parent_layout_paddingTop"
     android:paddingBottom="@dimen/main_parent_layout_paddingBottom">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/main_text_layout_marginLeft"
-        android:layout_marginTop="@dimen/main_text_llayout_marginTop"
-        android:text="Mr.xw@Happy Project"
-        android:textColor="@color/xw_white"
-        android:textSize="@dimen/main_text_textSize" />
 
     <Button
         android:id="@+id/mgtv_btn1"
@@ -68,6 +59,36 @@
         android:gravity="center"
         android:text="@string/myPlayer"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/main_text_layout_marginLeft"
+        android:layout_marginTop="@dimen/main_text_layout_marginTop"
+        android:text="@string/text1"
+        android:textColor="@color/xw_text"
+        android:textSize="@dimen/main_text_textSize" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/main_text_layout_marginLeft"
+        android:layout_marginTop="@dimen/main_text_layout_marginTop_fist"
+        android:text="@string/text2"
+        android:textColor="@color/xw_text"
+        android:textSize="@dimen/main_text_textSize_other" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/main_text_layout_marginLeft"
+        android:layout_marginTop="@dimen/main_text_layout_marginTop_second"
+        android:text="@string/text3"
+        android:textColor="@color/xw_text"
+        android:textSize="@dimen/main_text_textSize_other" />
 
 
 </RelativeLayout>

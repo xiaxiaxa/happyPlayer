@@ -8,16 +8,17 @@
 
     <!-- TextView -->
     <dimen name="main_text_layout_marginLeft">40px</dimen>
-    <dimen name="main_text_llayout_marginTop">10px</dimen>
-    <dimen name="main_text_textSize">40px</dimen>
-
+    <dimen name="main_text_layout_marginTop">30px</dimen>
+    <dimen name="main_text_textSize">30px</dimen>
+    <dimen name="main_text_textSize_other">20px</dimen>
+    <dimen name="main_text_layout_marginTop_fist">930px</dimen>
+    <dimen name="main_text_layout_marginTop_second">980px</dimen>
     <!-- Button -->
-    <dimen name="main_button_layout_width">220px</dimen>
-    <dimen name="main_button_layout_height">50px</dimen>
-    <dimen name="main_button_layout_marginLeft">40px</dimen>
-    <dimen name="main_button_layout_marginTop">100px</dimen>
-    <dimen name="main_button_layout_child_marginTop">20px</dimen>
-    <dimen name="main_button_textSize">20px</dimen>
-
+    <dimen name="main_button_layout_width">320px</dimen>
+    <dimen name="main_button_layout_height">70px</dimen>
+    <dimen name="main_button_layout_marginLeft">60px</dimen>
+    <dimen name="main_button_layout_marginTop">150px</dimen>
+    <dimen name="main_button_layout_child_marginTop">30px</dimen>
+    <dimen name="main_button_textSize">30px</dimen>
 
 </resources>

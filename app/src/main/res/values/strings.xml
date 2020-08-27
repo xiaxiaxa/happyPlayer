@@ -4,4 +4,9 @@
     <string name="exo">2、exo 播放器</string>
     <string name="ijk">3、ijk 播放器</string>
     <string name="myPlayer">4、MyPlayer@Mr.xw</string>
+
+    <string name="text1">自定义happyPlayer By Mr.Grapes</string>
+    <string name="text2">csdn地址:https://blog.csdn.net/xiaweilihai </string>
+    <string name="text3">github地址:https://github.com/xiaxiaxa </string>
+
 </resources>
