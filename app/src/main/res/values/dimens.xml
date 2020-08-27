@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="main_parent_layout_paddingLeft">20px</dimen>
+    <dimen name="main_parent_layout_paddingRight">20px</dimen>
+    <dimen name="main_parent_layout_paddingTop">20px</dimen>
+    <dimen name="main_parent_layout_paddingBottom">20px</dimen>
+
+    <!-- TextView -->
+    <dimen name="main_text_layout_marginLeft">40px</dimen>
+    <dimen name="main_text_llayout_marginTop">10px</dimen>
+    <dimen name="main_text_textSize">40px</dimen>
+
+    <!-- Button -->
+    <dimen name="main_button_layout_width">220px</dimen>
+    <dimen name="main_button_layout_height">50px</dimen>
+    <dimen name="main_button_layout_marginLeft">40px</dimen>
+    <dimen name="main_button_layout_marginTop">100px</dimen>
+    <dimen name="main_button_layout_child_marginTop">20px</dimen>
+    <dimen name="main_button_textSize">20px</dimen>
+
+
+</resources>
