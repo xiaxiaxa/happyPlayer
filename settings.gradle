@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':player', ':helper',
 rootProject.name='happy'

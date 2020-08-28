@@ -1,8 +1,8 @@
-package com.xw.happy.ui;
+package com.xw.helper.utils;
 
 import android.util.Log;
 
-import com.xw.happy.BuildConfig;
+import com.xw.helper.BuildConfig;
 
 public class MLog {
 

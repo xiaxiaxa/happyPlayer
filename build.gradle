@@ -22,9 +22,9 @@ allprojects {
 ext {
 
     // SDK And Tools
-    minSdkVersion = 14
+    minSdkVersion = 19
     targetSdkVersion = 22
-    compileSdkVersion = 27
+    compileSdkVersion = 29
     buildToolsVersion = '27.0.2'
     middlelibVersion = 'iptv-release-1.4-SNAPSHOT'
 
