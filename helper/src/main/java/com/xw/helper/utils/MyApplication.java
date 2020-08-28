@@ -1,13 +1,12 @@
-package com.xw.happy;
+package com.xw.helper.utils;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.xw.helper.utils.MLog;
 
 
 /**
@@ -18,18 +17,21 @@ import com.xw.helper.utils.MLog;
 public class MyApplication extends Application {
 
     private static MyApplication myApplication;
-
+    private static Context mContext = null;
     public static MyApplication getInstance() {
         return myApplication;
+    }
+
+    public MyApplication(){
+
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        myApplication = this;
+        mContext = this;
         initActivityLifecycleCallbacks();
     }
-
 
     /**
      * @Time: 2020/8/27 10:42
@@ -143,6 +145,15 @@ public class MyApplication extends Application {
                 MLog.i("onActivityPostDestroyed");
             }
         });
+    }
+
+
+    public static void init(MyApplication application) {
+        if (application == null) {
+            throw new NullPointerException("Can not use null initialized application context");
+        }
+        mContext = application.getApplicationContext();
+        myApplication = application;
     }
 
 }

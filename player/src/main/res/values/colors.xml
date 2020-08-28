@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sdk_player_framework_loading_background">#B40F0F0F</color>
+    <color name="sdk_player_framework_loading_text_color">#FFFFFF</color>
+    <color name="white">#ffffffff</color>
+    <color name="sdk_player_framework_progress_bg_color">#4DFFFFFF</color>
+
+    <color name="sdk_player_framework_progress_focus_bg_color">#FF2676D3</color>
+    <color name="sdk_player_framework_progress_bg_bg_color">#2958A2</color>
+    <color name="sdk_player_framework__progress_color">#00B3FF</color>
+
+    <color name="sdk_player_framework_transparent">#00000000</color>
+
+    <color name="sdk_player_framework_time_text_color">#b6bec4</color>
+
+    <color name="colorPrimary">#607D8B</color>
+    <color name="colorPrimaryDark">#455A64</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <color name="sdk_player_framework_progress_play_time_text_color">#b6bec4</color>
+</resources>

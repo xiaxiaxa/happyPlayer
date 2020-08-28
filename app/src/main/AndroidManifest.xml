@@ -5,8 +5,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".MyApplication"
         android:allowBackup="true"
+        android:name = ".happyApplication"
         android:icon="@drawable/mgtv"
         android:label="@string/app_name"
         android:supportsRtl="true"

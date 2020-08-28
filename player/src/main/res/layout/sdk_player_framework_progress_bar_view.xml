@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sdk_player_framework_progress_seek_bar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xw.player.framework.ui.MgtvSeekBarView
+        android:id="@+id/sdk_player_framework_seek_bar"
+        android:layout_width="@dimen/sdk_player_framework_seekbar_width"
+        android:layout_height="@dimen/sdk_player_framework_seekbar_height"
+        android:layout_marginLeft="@dimen/sdk_player_framework_seekbar_margin_left"
+        android:layout_marginTop="@dimen/sdk_player_framework_seekbar_margin_top" />
+
+    <ImageView
+        android:id="@+id/sdk_player_framework_play_state"
+        android:layout_width="@dimen/sdk_player_framework_progress_icon_width"
+        android:layout_height="@dimen/sdk_player_framework_progress_icon_height"
+        android:layout_marginLeft="@dimen/sdk_player_framework_progress_icon_left"
+        android:layout_marginTop="@dimen/sdk_player_framework_progress_icon_top"
+        android:scaleType="fitXY"
+        android:src="@color/sdk_player_framework_transparent" />
+
+    <TextView
+        android:id="@+id/sdk_player_framework_current_play_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sdk_player_framework_progress_seekbar_margin_left"
+        android:layout_marginTop="@dimen/sdk_player_framework_seekbar_play_timer_margin_top"
+        android:textColor="@color/sdk_player_framework_time_text_color"
+        android:textSize="@dimen/sdk_player_framework_progress_time_text_size" />
+
+    <TextView
+        android:id="@+id/sdk_player_framework_total_play_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/sdk_player_framework_progress_total_play_margin_left"
+        android:layout_marginTop="@dimen/sdk_player_framework_progress_play_timer_margin_top"
+        android:textColor="@color/sdk_player_framework_progress_play_time_text_color"
+        android:textSize="@dimen/sdk_player_framework_progress_play_time_text_size" />
+
+    <TextView
+        android:id="@+id/sdk_player_framework_seek_play_time"
+        android:layout_width="@dimen/sdk_player_framework_progress_seek_play_time_width"
+        android:layout_height="@dimen/sdk_player_framework_progress_seek_play_time_height"
+        android:layout_marginLeft="@dimen/sdk_player_framework_progress_seek_play_time_margin_left"
+        android:layout_marginTop="@dimen/sdk_player_framework_progress_seek_play_time_margin_top"
+        android:background="@drawable/sdk_player_framework_seek_time_bg"
+        android:gravity="center_horizontal|top"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sdk_player_framework_progress_seek_play_time_text_size" />
+
+
+</RelativeLayout>
