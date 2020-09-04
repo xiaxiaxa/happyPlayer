@@ -172,6 +172,7 @@ public class MyPlayerActivity extends Activity {
             try {
                 mgtvPlayerTestView.setTotalTime(player.getDuration());
                 mgtvPlayerTestView.setSeekBarProgress(player.getCurrentPosition());
+                mgtvPlayerTestView.setSeekBarMax(player.getDuration());
                 mgtvPlayerTestView.naturShowSeekBar(3000);
             } catch (IllegalStateException e) {
                 Log.d(TAG, "setDisplay e:" + e.getMessage());
@@ -267,8 +268,12 @@ public class MyPlayerActivity extends Activity {
                     mgtvPlayerTestView.playerUpKeyDown();
                     RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(1920,1080);
                     surfaceView.setLayoutParams(layoutParams1);
-                    player.switchPlayer(surfaceView,videoUrlHls1,false);
+//                    mgtvPlayerTestView.release();
+                    player.release();
+                    MgtvVideoPlayerImp player1 = new MgtvVideoPlayerImp();
+                    mgtvPlayerTestView.init(player1);
                     mgtvPlayerTestView.showSeekBarAndTextView(false);
+                    initMgtvPlayer();
                     return true;
                 default:
                     return super.dispatchKeyEvent(event);

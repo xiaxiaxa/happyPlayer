@@ -11,8 +11,10 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.xw.helper.utils.MLog;
 import com.xw.player.R;
 
+import static com.xw.player.framework.constants.PlayerConstants.NULL_TEXT;
 import static com.xw.player.framework.constants.PlayerConstants.SeekBarConstants.LEF_SEEK_BAR_ICON;
 import static com.xw.player.framework.constants.PlayerConstants.SeekBarConstants.MOVE_FLOAT;
 import static com.xw.player.framework.constants.PlayerConstants.SeekBarConstants.NONE_SEEK_BAR_ICON;
@@ -371,6 +373,27 @@ public class MgtvProgressSeekBarView extends FrameLayout implements IMgtvSeekBar
 
     public MgtvSeekBarView getMgtvSeekBarView() {
         return mgtvSeekBarView;
+    }
+
+
+    public void release() {
+        if (mgtvSeekBarView != null) {
+            mgtvSeekBarView.setProgress(0);
+            mgtvSeekBarView.setVisibility(GONE);
+            mgtvSeekBarView = null;
+        }
+        if (timeText != null) {
+            timeText.setText(NULL_TEXT);
+            timeText = null;
+        }
+        if (totalTimeText != null) {
+            totalTimeText.setText(NULL_TEXT);
+            totalTimeText = null;
+        }
+        if (seekTimeText != null) {
+            seekTimeText.setText(NULL_TEXT);
+            seekTimeText = null;
+        }
     }
 
 }

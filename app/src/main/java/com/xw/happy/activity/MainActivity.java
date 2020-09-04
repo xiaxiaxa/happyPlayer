@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -63,5 +64,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
             intent.putExtra("url", videoUrlHls1);
             startActivity(intent);
         }
+    }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            switch (event.getKeyCode()) {
+                case KeyEvent.KEYCODE_BACK:
+                    return true;
+                default:
+                    return super.dispatchKeyEvent(event);
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 }

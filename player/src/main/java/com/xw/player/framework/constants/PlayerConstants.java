@@ -8,7 +8,7 @@ package com.xw.player.framework.constants;
 public class PlayerConstants {
 
     public static final int HIDE_PROGRESS_DELAY_TIME = 3000;
-
+    public static final String NULL_TEXT = "";
     /**
      * @Time: 2020/8/3 11:03
      * @Description: 进度条View相关常量

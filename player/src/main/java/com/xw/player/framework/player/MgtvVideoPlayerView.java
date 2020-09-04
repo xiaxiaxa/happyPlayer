@@ -1,11 +1,13 @@
 package com.xw.player.framework.player;
 
 import android.content.Context;
+
 import android.os.Handler;
 import android.os.Message;
 
 import android.util.AttributeSet;
 import android.view.KeyEvent;
+
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -73,20 +75,14 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     private Timer timer;
     private boolean isFirstInit = false;
     private static final String TAG = "MgtvVideoPlayerView";
+    private int lastDelayTime;
+    private TimerTask task;
 
     /**
      * @description 计时器刷新时间显示以及进度相关增量逻辑处理
      * @date: 2020/8/9 1:42
      * @author: Mr.xw
      */
-    private TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            Message message = new Message();
-            message.what = UPDATE_TIME_TEXT;
-            mHandler.sendMessage(message);
-        }
-    };
 
     private Runnable hideProgressBarViewRunner = new Runnable() {
 
@@ -146,25 +142,55 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
                 playInfo = new PlayInfo();
             }
             /**适配机顶盒得出延迟经验值，延迟50ms一次task，然后每隔100ms执行一次task*/
-            if (timer == null) {
-                timer = new Timer();
-            } else {
-                timer.cancel();
-            }
-            timer.schedule(task, 50, 100);
+            startTimerAndTask();
             initView();
+
         } else {
             MLog.d("Error calling method about init");
         }
+    }
+
+    private void clearTimerAndTask() {
+
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        if (task != null) {
+            task.cancel();
+            task = null;
+        }
+    }
+
+    private void startTimerAndTask() {
+
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        if (task != null) {
+            task.cancel();
+            task = null;
+        }
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+                Message message = new Message();
+                message.what = UPDATE_TIME_TEXT;
+                if (mHandler != null) {
+                    mHandler.sendMessage(message);
+                }
+            }
+        };
+        timer.schedule(task, 20, 100);
     }
 
     protected void updateSeekData() {
         getSeekBarAcceleration();
         if (isSeekAndToPlay()) {
             if (isNeedAddUnform()) {
-                if (isLongPress()) {
-                    setSeekBarProgress(getSeekBarKeyEnvent());
-                }
+                setSeekBarProgress(getSeekBarKeyEnvent());
             }
         } else {
             setSeekBarProgress(getCurrentPosition());
@@ -358,7 +384,11 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
         addView(mgtvProgressSeekBarView);
         mgtvProgressSeekBarView.initMgtvProgressSeekBarView();
         if (mHandler != null) {
-            mHandler.postDelayed(hideProgressBarViewRunner, DELAY_INIT_PROGRESS_BAR);
+            if (lastDelayTime > 0) {
+                mHandler.postDelayed(hideProgressBarViewRunner, lastDelayTime);
+            } else {
+                mHandler.postDelayed(hideProgressBarViewRunner, DELAY_INIT_PROGRESS_BAR);
+            }
         }
         getPlayerUniform();
     }
@@ -497,10 +527,19 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
 
 
     public boolean playerBackKeyDown() {
+        setSeekAndToPlay(false);
+        setHide(false);
         return true;
     }
 
     public boolean playerCenterKeyDown() {
+        setHide(true);
+        setNeedAddUnform(false);
+        setSeekTimeTextVisibility(INVISIBLE);
+        defualtNum = DEFUALTNUM;
+        if (getMgtvVideoPlayer().isPlaying()) {
+            setPause(true);
+        }
         if (getMgtvProgressSeekBarView() != null) {
             setSeekAndToPlay(false);
             if (getMgtvVideoPlayer() != null) {
@@ -518,6 +557,17 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
         return true;
     }
 
+    private void switchShortAndLongKeyEvent() {
+
+        if (!isLongPress()) {
+            clearTimerAndTask();
+            setSeekBarProgress(getSeekBarKeyEnvent());
+        } else {
+            startTimerAndTask();
+        }
+
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -532,73 +582,22 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
                 setLongPress(true);
             }
             switch (event.getKeyCode()) {
-
-                /**创维盒子部分键值*/
                 case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
-
-                    /**华为盒子子部分键值*/
                 case KeyEvent.KEYCODE_MEDIA_REWIND:
-
                 case KeyEvent.KEYCODE_DPAD_LEFT:
-                    setSeekAndToPlay(true);
-                    setNeedAddUnform(true);
-                    setPause(false);
-                    setLeftKeyEvent(true);
-                    if (mHandler != null) {
-                        mHandler.postDelayed(showProgressBarViewRunner, HIDE_PROGRESS_DELAY_TIME);
-                    }
-                    showSeekBarAndTextView(true);
-                    setPlayIconView(LEF_SEEK_BAR_ICON);
-                    if (!isLongPress()) {
-                        /**兼容部分设备响应键值<120ms,导致timer计时器里面没有执行短按步长*/
-                        setSeekBarProgress(getSeekBarKeyEnvent());
-                    }
-
                     playerLeftKeyDown();
-                    setHide(false);
                     return true;
-
-                /**创维、华为MBOX部分键值*/
                 case KeyEvent.KEYCODE_MEDIA_NEXT:
-
-                    /**ZTE MBOX部分键值*/
                 case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
-
                 case KeyEvent.KEYCODE_DPAD_RIGHT:
-                    setPause(false);
-                    setSeekAndToPlay(true);
-                    setNeedAddUnform(true);
-                    setLeftKeyEvent(false);
-                    if (mHandler != null) {
-                        mHandler.postDelayed(showProgressBarViewRunner, HIDE_PROGRESS_DELAY_TIME);
-                    }
-                    showSeekBarAndTextView(true);
-                    setPlayIconView(RIGHT_SEEK_BAR_ICON);
-
-
-                    /**兼容部分设备响应键值<120ms,导致timer计时器里面没有执行短按步长*/
-                    if (!isLongPress()) {
-                        setSeekBarProgress(getSeekBarKeyEnvent());
-                    }
-
                     playerRightKeyDown();
-                    setHide(false);
                     return true;
                 case KeyEvent.KEYCODE_BACK:
                     playerBackKeyDown();
-                    setSeekAndToPlay(false);
-                    setHide(false);
                     return true;
                 case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
                 case KeyEvent.KEYCODE_DPAD_CENTER:
-                    setHide(true);
-                    setNeedAddUnform(false);
-                    setSeekTimeTextVisibility(INVISIBLE);
-                    if (getMgtvVideoPlayer().isPlaying()) {
-                        setPause(true);
-                    }
                     playerCenterKeyDown();
-                    defualtNum = DEFUALTNUM;
                     return true;
                 default:
                     showSeekBarAndTextView(false);
@@ -612,19 +611,24 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
             if (!isHide()) {
                 setPlayIconView(NONE_SEEK_BAR_ICON);
             }
+            setNeedAddUnform(false);
             if (isSeekAndToPlay()) {
                 seekAndToPlay();
+                startTimerAndTask();
             }
             /**加速度倍速复位*/
             accelerationTime = 1;
             defualtNum = 1;
-
             if (mHandler != null) {
                 mHandler.removeCallbacks(showProgressBarViewRunner);
                 mHandler.removeCallbacks(hideProgressBarViewRunner);
-                mHandler.postDelayed(hideProgressBarViewRunner, HIDE_PROGRESS_DELAY_TIME);
+                if (lastDelayTime > 0) {
+                    mHandler.postDelayed(hideProgressBarViewRunner, lastDelayTime);
+                } else {
+                    mHandler.postDelayed(hideProgressBarViewRunner, HIDE_PROGRESS_DELAY_TIME);
+                }
             }
-            setNeedAddUnform(false);
+
         }
 
         return super.dispatchKeyEvent(event);
@@ -641,6 +645,14 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     }
 
     public boolean playerLeftKeyDown() {
+        setSeekAndToPlay(true);
+        setNeedAddUnform(true);
+        setPause(false);
+        setLeftKeyEvent(true);
+        setHide(false);
+        showSeekBarAndTextView(true);
+        setPlayIconView(LEF_SEEK_BAR_ICON);
+        switchShortAndLongKeyEvent();
         if (getMgtvVideoPlayer() != null) {
             setSeekBarMax(getDuration());
         }
@@ -651,6 +663,14 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     }
 
     public boolean playerRightKeyDown() {
+        setPause(false);
+        setSeekAndToPlay(true);
+        setNeedAddUnform(true);
+        setLeftKeyEvent(false);
+        setHide(false);
+        showSeekBarAndTextView(true);
+        setPlayIconView(RIGHT_SEEK_BAR_ICON);
+        switchShortAndLongKeyEvent();
         setSeekBarMax(getDuration());
         if (getMgtvProgressSeekBarView() != null) {
             getMgtvProgressSeekBarView().playerRightKeyDown();
@@ -723,12 +743,13 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     @Override
     public void naturShowSeekBar(int delayTime) {
 
+        lastDelayTime = delayTime;
+
         if (getMgtvProgressSeekBarView() != null) {
             getMgtvProgressSeekBarView().showSeekBarAndTextView();
             /**seektime时间不显示*/
             getMgtvProgressSeekBarView().setSeekTimeTextVisibility(INVISIBLE);
         }
-
         if (mHandler != null) {
             mHandler.removeCallbacks(showProgressBarViewRunner);
             mHandler.removeCallbacks(hideProgressBarViewRunner);
@@ -738,21 +759,28 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     }
 
     public void release() {
-
+        setFirstInit(false);
+        if (mgtvProgressSeekBarView != null) {
+            mgtvProgressSeekBarView.release();
+            mgtvProgressSeekBarView = null;
+        }
+        if (mgtvLoadingView != null) {
+            mgtvLoadingView.setVisibility(GONE);
+            mgtvLoadingView = null;
+        }
         if (timer != null) {
             timer.cancel();
             timer = null;
         }
+
         if (task != null) {
             task.cancel();
             task = null;
         }
         if (mHandler != null) {
-            mHandler.removeCallbacks(null);
+            mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
         }
-        setFirstInit(false);
-
     }
 
     public int getCurrentPosition() {
@@ -841,5 +869,5 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     private void setFirstInit(boolean firstInit) {
         isFirstInit = firstInit;
     }
-
 }
+
