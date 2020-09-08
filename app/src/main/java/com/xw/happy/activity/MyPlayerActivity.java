@@ -110,6 +110,7 @@ public class MyPlayerActivity extends Activity {
 
     @Override
     protected void onResume() {
+        mgtvPlayerTestView.natureShowSeekBar(3000);
         super.onResume();
     }
 
@@ -130,6 +131,7 @@ public class MyPlayerActivity extends Activity {
     private ListenerCallBack listenerCallBack = new ListenerCallBack() {
         @Override
         public void onEvent(PlayerConstants.EventType type, Object... params) {
+
         }
 
 
@@ -164,7 +166,7 @@ public class MyPlayerActivity extends Activity {
 
         @Override
         public void onPrepare() {
-
+            player.setLoopPlay(true);
         }
 
         @Override
@@ -173,7 +175,7 @@ public class MyPlayerActivity extends Activity {
                 mgtvPlayerTestView.setTotalTime(player.getDuration());
                 mgtvPlayerTestView.setSeekBarProgress(player.getCurrentPosition());
                 mgtvPlayerTestView.setSeekBarMax(player.getDuration());
-                mgtvPlayerTestView.naturShowSeekBar(3000);
+                mgtvPlayerTestView.natureShowSeekBar(3000);
             } catch (IllegalStateException e) {
                 Log.d(TAG, "setDisplay e:" + e.getMessage());
             } catch (IllegalArgumentException ex) {
@@ -250,7 +252,6 @@ public class MyPlayerActivity extends Activity {
                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(1920,1080);
                     surfaceView.setLayoutParams(layoutParams);
                     player.switchPlayer(surfaceView,videoUrlHls2,false);
-                    mgtvPlayerTestView.showSeekBarAndTextView(false);
                     /*                    *//**测试直播切台*//*
                     playInfo.setUrl(videoUrlRtp2);
                     player.stop();
@@ -272,7 +273,6 @@ public class MyPlayerActivity extends Activity {
                     player.release();
                     MgtvVideoPlayerImp player1 = new MgtvVideoPlayerImp();
                     mgtvPlayerTestView.init(player1);
-                    mgtvPlayerTestView.showSeekBarAndTextView(false);
                     initMgtvPlayer();
                     return true;
                 default:

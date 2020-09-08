@@ -426,6 +426,7 @@ public class MgtvPlayer extends BasePlayer implements IMgtvPlayer, IBasePlayer {
      */
     public void setLoopPlay(boolean loopPlay) {
         isLoopPlay = loopPlay;
+        MLog.d("Mr.xw==loopPlay" + loopPlay);
     }
 
     /**
@@ -434,6 +435,7 @@ public class MgtvPlayer extends BasePlayer implements IMgtvPlayer, IBasePlayer {
      * @Author: Mr.xw
      */
     public boolean getLoopPlay() {
+        MLog.d("Mr.xw==isLoopPlay111" + isLoopPlay);
         return isLoopPlay;
     }
 
@@ -529,8 +531,9 @@ public class MgtvPlayer extends BasePlayer implements IMgtvPlayer, IBasePlayer {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        mediaPlayer.setLooping(getLoopPlay());
         mediaPlayer.prepareAsync();
+/*        mediaPlayer.setLooping(isLoopPlay);
+        MLog.d("Mr.xw==isLoopPlay333()" + isLoopPlay);*/
     }
 
 
@@ -554,6 +557,7 @@ public class MgtvPlayer extends BasePlayer implements IMgtvPlayer, IBasePlayer {
                 if (playerListenerCallBack != null) {
                     playerListenerCallBack.onPrepare();
                     playerListenerCallBack.onEvent(PlayerConstants.EventType.EVENT_TYPE_PREPARED);
+
                 }
 
                 getHandler().postDelayed(
@@ -562,6 +566,7 @@ public class MgtvPlayer extends BasePlayer implements IMgtvPlayer, IBasePlayer {
                             public void run() {
                                 if (mediaPlayer != null) {
                                     mediaPlayer.start();
+                                    mediaPlayer.setLooping(getLoopPlay());
                                     mCurrentState = STATE_START;
                                     if (playerListenerCallBack != null) {
                                         playerListenerCallBack.onStart();

@@ -150,18 +150,6 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
         }
     }
 
-    private void clearTimerAndTask() {
-
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
-        if (task != null) {
-            task.cancel();
-            task = null;
-        }
-    }
-
     private void startTimerAndTask() {
 
         if (timer != null) {
@@ -183,14 +171,16 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
                 }
             }
         };
-        timer.schedule(task, 20, 100);
+        timer.schedule(task, 50, 100);
     }
 
     protected void updateSeekData() {
         getSeekBarAcceleration();
         if (isSeekAndToPlay()) {
             if (isNeedAddUnform()) {
-                setSeekBarProgress(getSeekBarKeyEnvent());
+                if (isLongPress()) {
+                    setSeekBarProgress(getSeekBarKeyEvent());
+                }
             }
         } else {
             setSeekBarProgress(getCurrentPosition());
@@ -251,7 +241,7 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
      * @date: 2020/8/9 0:52
      * @author: Mr.xw
      */
-    public int getSeekBarKeyEnvent() {
+    public int getSeekBarKeyEvent() {
         if (isLongPress()) {
             defualtNum++;
         } else {
@@ -558,16 +548,17 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
     }
 
     private void switchShortAndLongKeyEvent() {
-
         if (!isLongPress()) {
-            clearTimerAndTask();
-            setSeekBarProgress(getSeekBarKeyEnvent());
-        } else {
-            startTimerAndTask();
+            setSeekBarProgress(getSeekBarKeyEvent());
         }
-
     }
 
+    /**
+     * @method dispatchKeyEvent
+     * @description View按键分发处理加速度等
+     * @date: 2020/9/5 9:22
+     * @author: Mr.xw
+     */
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -614,7 +605,6 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
             setNeedAddUnform(false);
             if (isSeekAndToPlay()) {
                 seekAndToPlay();
-                startTimerAndTask();
             }
             /**加速度倍速复位*/
             accelerationTime = 1;
@@ -628,7 +618,8 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
                     mHandler.postDelayed(hideProgressBarViewRunner, HIDE_PROGRESS_DELAY_TIME);
                 }
             }
-
+            setLongPress(false);
+            setSeekAndToPlay(false);
         }
 
         return super.dispatchKeyEvent(event);
@@ -734,14 +725,15 @@ public class MgtvVideoPlayerView extends FrameLayout implements IMgtvVideoPlayer
         }
     }
 
+
     /**
-     * @Method:naturShowSeekBar
+     * @Method:natureShowSeekBar
      * @Time: 2020/8/26 16:45
      * @Description: 提供给业务层自然显示进度条并且根据传入的时间隐藏进度条
      * @Author: Mr.xw
      */
     @Override
-    public void naturShowSeekBar(int delayTime) {
+    public void natureShowSeekBar(int delayTime) {
 
         lastDelayTime = delayTime;
 

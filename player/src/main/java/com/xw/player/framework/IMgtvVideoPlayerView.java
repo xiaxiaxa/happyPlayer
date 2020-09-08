@@ -103,6 +103,6 @@ public interface IMgtvVideoPlayerView {
 
     void hidePlayIcon();
 
-    void naturShowSeekBar(int delayTime);
+    void natureShowSeekBar(int delayTime);
 
 }
