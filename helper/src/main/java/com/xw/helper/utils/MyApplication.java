@@ -21,7 +21,6 @@ public class MyApplication extends Application {
     public static MyApplication getInstance() {
         return myApplication;
     }
-
     public MyApplication(){
 
     }
@@ -31,6 +30,7 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = this;
         initActivityLifecycleCallbacks();
+
     }
 
     /**

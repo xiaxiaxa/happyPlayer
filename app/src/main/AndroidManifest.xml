@@ -21,8 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activity.MyPlayerActivity"
+            android:label="@string/app_name" />
+
+        <activity
+            android:name=".activity.VlcPlayerActivity"
             android:label="@string/app_name" />
 
     </application>

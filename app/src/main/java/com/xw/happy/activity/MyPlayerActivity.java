@@ -269,11 +269,7 @@ public class MyPlayerActivity extends Activity {
                     mgtvPlayerTestView.playerUpKeyDown();
                     RelativeLayout.LayoutParams layoutParams1 = new RelativeLayout.LayoutParams(1920,1080);
                     surfaceView.setLayoutParams(layoutParams1);
-//                    mgtvPlayerTestView.release();
-                    player.release();
-                    MgtvVideoPlayerImp player1 = new MgtvVideoPlayerImp();
-                    mgtvPlayerTestView.init(player1);
-                    initMgtvPlayer();
+                    player.switchPlayer(surfaceView,videoUrlHls1,false);
                     return true;
                 default:
                     return super.dispatchKeyEvent(event);

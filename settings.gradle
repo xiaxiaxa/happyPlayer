@@ -1,2 +1,2 @@
-include ':app', ':player', ':helper', ':net',
+include ':app', ':player', ':helper', ':net', ':vlc',
 rootProject.name='happy'

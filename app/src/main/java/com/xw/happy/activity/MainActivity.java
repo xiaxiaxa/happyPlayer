@@ -44,11 +44,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-/*        if (v == mHlsButton1) {
-            Intent intent = new Intent(mContext, MgtvPlayerActivity.class);
+      if (v == mHlsButton1) {
+
+            Intent intent = new Intent(mContext, VlcPlayerActivity.class);
             intent.putExtra("url", videoUrlHls1);
             startActivity(intent);
         }
+        /*
         if (v == mHlsButton2) {
             Intent intent = new Intent(mContext, MgtvPlayerActivity.class);
             intent.putExtra("url", videoUrlHls2);
