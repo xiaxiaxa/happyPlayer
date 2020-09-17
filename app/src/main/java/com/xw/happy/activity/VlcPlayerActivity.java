@@ -27,6 +27,8 @@ import org.videolan.libvlc.MediaPlayer;
 
 import java.util.ArrayList;
 
+import static com.xw.happy.ui.CommonUtil.getAbility;
+
 /**
  * @Time: 2020/8/27 10:11
  * @Description: 自定义VlcPlayer
@@ -65,6 +67,7 @@ public class VlcPlayerActivity extends Activity implements IVLCVout.OnNewVideoLa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MLog.d("VlcPlayerActivity  onCreate====");
+        getAbility("search_page");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vlc_play);
 //        SAMPLE_URL = getIntent().getStringExtra("extra_url");

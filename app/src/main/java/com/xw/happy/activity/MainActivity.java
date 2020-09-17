@@ -1,9 +1,14 @@
 package com.xw.happy.activity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.BaseColumns;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +18,11 @@ import com.xw.happy.happyApplication;
 import com.xw.helper.utils.MLog;
 import com.xw.helper.utils.MyApplication;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+import java.util.logging.Logger;
+
+import static org.videolan.libvlc.util.VLCUtil.TAG;
+
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private Button mHlsButton1;
     private Button mHlsButton2;
@@ -25,13 +34,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
      */
     private String videoUrlHls1 = "http://10.255.30.137:8082/EDS/RedirectPlay/000000000000/vod/75c2a75766da48a692c8383b5d79926a/56cc3627501c469cb9a66022c83ca984?UserToken=00228754829678360681080810093254&UserName=6830016";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         happyApplication.init((MyApplication) getApplication());
         mContext = happyApplication.getInstance().getApplicationContext();
-        MLog.i("onCreate");
+        MLog.i("onCreate1111");
         mHlsButton1 = findViewById(R.id.mgtv_btn1);
         mHlsButton2 = findViewById(R.id.mgtv_btn2);
         mHlsButton3 = findViewById(R.id.mgtv_btn3);
@@ -40,11 +50,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
         mHlsButton2.setOnClickListener(this);
         mHlsButton3.setOnClickListener(this);
         mHlsButton4.setOnClickListener(this);
+
+        /**test*/
+
+
     }
+
 
     @Override
     public void onClick(View v) {
-      if (v == mHlsButton1) {
+        if (v == mHlsButton1) {
 
             Intent intent = new Intent(mContext, VlcPlayerActivity.class);
             intent.putExtra("url", videoUrlHls1);
@@ -67,6 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             startActivity(intent);
         }
     }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
@@ -79,4 +95,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         return super.dispatchKeyEvent(event);
     }
+
+
 }

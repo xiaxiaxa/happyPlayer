@@ -19,6 +19,8 @@ import com.xw.player.framework.player.MgtvVideoPlayerImp;
 import com.xw.player.framework.player.MgtvVideoPlayerView;
 import com.xw.player.framework.ui.IViewListener;
 
+import static com.xw.happy.ui.CommonUtil.getAbility;
+
 /**
  * @Time: 2020/8/27 10:10
  * @Description: 自定义MediaPlayer
@@ -63,28 +65,29 @@ public class MyPlayerActivity extends Activity {
         surfaceView1 = findViewById(R.id.surface1);
         initIntent();
         MLog.d("initIntent=" + initIntent());
+        getAbility("search_page");
         player.init(mContext);
         mgtvPlayerTestView = findViewById(R.id.mgtv_player);
         mgtvPlayerTestView.init(player);
         iViewListener = new IViewListener() {
             @Override
             public void hideSeekBarAndTextView() {
-                Log.d("Mr.xw=123=","=hideSeekBarAndTextView=" );
+                MLog.d("=hideSeekBarAndTextView=" );
             }
 
             @Override
             public void showSeekBarAndTextView() {
-                Log.d("Mr.xw=123=","=showSeekBarAndTextView=");
+                MLog.d("=showSeekBarAndTextView=");
             }
 
             @Override
             public void showSeekTimeTextView() {
-                Log.d("Mr.xw=123=","=showSeekTimeTextView=" );
+                MLog.d("=showSeekTimeTextView=" );
             }
 
             @Override
             public void hideSeekTimeTextView() {
-                Log.d("Mr.xw=123=","=hideSeekTimeTextView=" );
+                MLog.d("=hideSeekTimeTextView=" );
             }
         };
         mgtvPlayerTestView.getMgtvProgressSeekBarView().setViewListener(iViewListener);
@@ -123,7 +126,7 @@ public class MyPlayerActivity extends Activity {
         initPlayInfo();
         player.setListenerCallBack(listenerCallBack);
         /** 准备工作完成，开始正常播放流程*/
-        Log.d("Mr.xw==" , "player.getCurrentState ==  "+ player.getCurrentState());
+        MLog.d( "player.getCurrentState ==  "+ player.getCurrentState());
         player.openMediaPlayer(surfaceView,0,0,false);
 
     }
