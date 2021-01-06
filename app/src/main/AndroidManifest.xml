@@ -30,6 +30,10 @@
             android:name=".activity.VlcPlayerActivity"
             android:label="@string/app_name" />
 
+        <activity
+            android:name=".activity.IjkPlayerActivity"
+            android:label="@string/app_name" />
+
     </application>
 
 </manifest>

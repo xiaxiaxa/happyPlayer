@@ -67,7 +67,7 @@ public class VlcPlayerActivity extends Activity implements IVLCVout.OnNewVideoLa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MLog.d("VlcPlayerActivity  onCreate====");
-        getAbility("search_page");
+//        getAbility("search_page");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vlc_play);
 //        SAMPLE_URL = getIntent().getStringExtra("extra_url");

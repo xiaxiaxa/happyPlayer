@@ -2,7 +2,6 @@ package com.xw.helper.utils;
 
 import android.util.Log;
 
-import com.xw.helper.BuildConfig;
 
 public class MLog {
 

@@ -40,7 +40,9 @@ public class MyPlayerActivity extends Activity {
     /**
      *45分多钟的正常片*
      */
-    private String videoUrlHls1 = "http://10.255.30.137:8082/EDS/RedirectPlay/000000000000/vod/f95e41c67ca2410c89b335ee5f5eecb8/3cc6fae6d07740aa8d57934e26cc2632?UserToken=123456789&UserName=6830018";
+
+    private String videoUrlHls1 ="http://10.255.30.137:8082/EDS/RedirectPlay/000000000000/vod/5e990b4c8aee957d47c1c002118dbcf9/5ec23aca2f20487083931172f5002cff?UserToken=123456789&UserName=CS005456387004%40VOD";
+//    private String videoUrlHls1 = "http://10.255.30.137:8082/EDS/RedirectPlay/000000000000/vod/f95e41c67ca2410c89b335ee5f5eecb8/3cc6fae6d07740aa8d57934e26cc2632?UserToken=123456789&UserName=6830018";
     /**
      * 1分多钟的短片*
      */

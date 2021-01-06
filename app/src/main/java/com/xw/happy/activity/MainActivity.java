@@ -18,9 +18,6 @@ import com.xw.happy.happyApplication;
 import com.xw.helper.utils.MLog;
 import com.xw.helper.utils.MyApplication;
 
-import java.util.logging.Logger;
-
-import static org.videolan.libvlc.util.VLCUtil.TAG;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -65,17 +62,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent.putExtra("url", videoUrlHls1);
             startActivity(intent);
         }
-        /*
-        if (v == mHlsButton2) {
-            Intent intent = new Intent(mContext, MgtvPlayerActivity.class);
-            intent.putExtra("url", videoUrlHls2);
-            startActivity(intent);
-        }
-        if (v == mHlsButton3) {
-            Intent intent = new Intent(mContext, MgtvPlayerActivity.class);
-            intent.putExtra("url", videoUrlHls3);
+/*        if (v == mHlsButton2) {
+            Intent intent = new Intent(mContext, IjkPlayerActivity.class);
+            intent.putExtra("url", videoUrlHls1);
             startActivity(intent);
         }*/
+        if (v == mHlsButton3) {
+            Intent intent = new Intent(mContext, IjkPlayerActivity.class);
+            intent.putExtra("url", videoUrlHls1);
+            startActivity(intent);
+        }
         if (v == mHlsButton4) {
             Intent intent = new Intent(mContext, MyPlayerActivity.class);
             intent.putExtra("url", videoUrlHls1);
