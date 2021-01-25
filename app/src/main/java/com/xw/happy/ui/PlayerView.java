@@ -82,8 +82,8 @@ public class PlayerView extends FrameLayout {
 
             }
         });
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT
-                , LayoutParams.MATCH_PARENT, Gravity.CENTER);
+        LayoutParams layoutParams = new LayoutParams(600
+                , 700, Gravity.CENTER);
 //        mSurfaceView.setLayoutParams(layoutParams);
         addView(mSurfaceView, 0, layoutParams);
     }
