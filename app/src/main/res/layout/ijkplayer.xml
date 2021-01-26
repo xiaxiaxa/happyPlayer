@@ -13,16 +13,17 @@
         android:foregroundGravity="clip_horizontal|clip_vertical"
         tools:ignore="true">
 
+
         <com.xw.happy.ui.PlayerView
-            android:layout_marginLeft="300px"
+
             android:id="@+id/ijk_player"
-            android:layout_width="620px"
-            android:layout_height="620px" />
+            android:layout_width="1920px"
+            android:layout_height="1080px" />
 
         <SurfaceView
             android:id="@+id/surface3"
-            android:layout_width="300px"
-            android:layout_height="200px"
+            android:layout_width="1920px"
+            android:layout_height="1080px"
             android:visibility="gone"></SurfaceView>
 
         <com.xw.happy.activity.MgtvPlayerTestView
